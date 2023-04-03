@@ -2,9 +2,9 @@ from kit_learn import LinearRegression
 
 model = LinearRegression()
 
-X = [2, 4, 5, 6, 8, 10]
+X = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]] 
 
-y = [60, 70, 75, 85, 90, 95]
+y = [4, 7, 10, 13]
 
 model.fit(X, y)
-print(model.predict([7]))
+print(model.predict([[2, 3, 4], [5, 6, 7]]))
