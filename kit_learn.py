@@ -36,14 +36,19 @@ class LinearRegression:
 
     def fit(self, X, y) -> None:
         """
-        Fits the LinearRegression model.
+        Fit the linear regression model to the training data.
 
-        Args:
-          X (ndarray (m,n)): input data, m examples, n features
-          y (ndarray (m,)): target variable
+        Parameters
+        ----------
+        X : ndarray of shape (n_samples, n_features)
+            The input data.
+        y : ndarray of shape (n_samples,)
+            The target values.
 
-        Returns:
-          None
+        Returns
+        -------
+        None
+
         """
         m = X.shape[1]
         self.w = np.array([0]*m)
@@ -66,13 +71,18 @@ class LinearRegression:
                 
     def predict(self, x)-> list:
         """
-        Predicts the target variable.
+        Predict the output of the linear regression model on new data.
 
-        Args:
-          x (ndarray (m,n)): input data, m examples, n features
+        Parameters
+        ----------
+        X : ndarray of shape (n_samples, n_features)
+            The input data.
 
-        Returns:
-          result (list): predicted target variable for each example
+        Returns
+        -------
+        y_pred : ndarray of shape (n_samples,)
+            The predicted target values.
+
         """
         result = []
         for i in range(x.shape[0]):
@@ -82,15 +92,22 @@ class LinearRegression:
     
     def zscore_normalize_features(self, X):
         """
-        computes  X, zcore normalized by column
+        Normalize the input features of X using the z-score normalization method.
 
-        Args:
-          X (ndarray (m,n))     : input data, m examples, n features
+        Parameters
+        ----------
+        X : ndarray of shape (n_samples, n_features)
+            The input data.
 
-        Returns:
-          X_norm (ndarray (m,n)): input normalized by column
-          mu (ndarray (n,))     : mean of each feature
-          sigma (ndarray (n,))  : standard deviation of each feature
+        Returns
+        -------
+        X_norm : ndarray of shape (n_samples, n_features)
+            The normalized input data.
+        mu : ndarray of shape (n_features,)
+            The mean of each feature in X.
+        sigma : ndarray of shape (n_features,)
+            The standard deviation of each feature in X.
+
         """
         mu = np.mean(X, axis=0)                 
         sigma = np.std(X, axis=0)          
