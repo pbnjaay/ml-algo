@@ -23,9 +23,10 @@ class BaseModel(ABC):
 
 
 class LinearRegression(BaseModel):
-    def __init__(self, alpha = 0.001, iter=1000) -> None:
+    def __init__(self, alpha = 0.001, iter=1000, lambda_=0.1) -> None:
         super().__init__()
         self.alpha = alpha
+        self.lambda_ = lambda_
         self.iter = iter
         self.w = None
         self.b = None
@@ -40,7 +41,7 @@ class LinearRegression(BaseModel):
         for i in range(self.iter):
             y_pred = np.dot(X, self.w) + self.b
             residue = y_pred - y
-            self.w -= self.alpha * (1/m) * np.sum(np.dot(X.T, residue))
+            self.w -= self.alpha * (1/m) * np.sum(np.dot(X.T, residue)) + (self.lambda_/m) * self.w
             self.b -= self.alpha * (1/m)  * np.sum(residue)
 
     def predict(self, x):
@@ -55,9 +56,10 @@ class LinearRegression(BaseModel):
         return 1 - (SS_res / SS_tot)
 
 class LogisticRegression(BaseModel):
-    def __init__(self, alpha=0.01, iter=1000) -> None:
+    def __init__(self, alpha=0.01, iter=1000, lambda_=0.1) -> None:
         super().__init__()
         self.alpha = alpha
+        self.lambda_ = lambda_
         self.iter = iter
         self.w = None
         self.b = None
@@ -73,7 +75,7 @@ class LogisticRegression(BaseModel):
             z = np.dot(X, self.w) + self.b
             y_pred = self.__sigmoid(z)
             residue = y_pred - y
-            self.w -= self.alpha * (1/m) * np.sum(np.dot(X.T, residue))
+            self.w -= self.alpha * (1/m) * np.sum(np.dot(X.T, residue)) + (self.lambda_/m) * self.w
             self.b -= self.alpha * (1/m)  * np.sum(residue)
 
 
